@@ -1,0 +1,28 @@
+@Processingスケッチ
+--track0:幅,1,4000,640,1
+--track1:縦,1,4000,360,1
+--track2:乱数シード,0,99999,0,1
+--track3:開始秒,0,1000,0,0.1
+--check0:累積描画,0
+--file:
+local dir = obj.getinfo("script_path") or "script\\"
+if not PROCESSING_PATH_ADDED then
+  package.path = dir .. "?.lua;" .. package.path
+  PROCESSING_PATH_ADDED = true
+end
+local P = require("processing")
+-- 「参照ファイル」で選んだスケッチ。未選択なら見本を使う
+local path = file
+if path == nil or path == "" then
+  path = dir .. "processing_sketches\\sample_bounce.pde"
+end
+P.run({
+  sketch = path,
+  width = obj.track0,
+  height = obj.track1,
+  seed = obj.track2,
+  mode = 1,
+  offset = obj.track3,
+  accum = (obj.check0 == true or obj.check0 == 1),
+  key = "L" .. tostring(obj.layer) .. "_" .. path,
+})

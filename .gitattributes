@@ -1,0 +1,5 @@
+# Shift_JIS + CRLF のまま保存するため改行・文字コード変換をしない
+*.lua -text
+*.obj -text
+*.pde -text
+*.md -text
